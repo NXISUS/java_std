@@ -3,16 +3,11 @@ package ru.stqa.addressbook;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-import static org.testng.Assert.*;
 
 import java.util.concurrent.TimeUnit;
-import java.util.Date;
-import java.io.File;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.interactions.Actions;
+
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.*;
-import static org.openqa.selenium.OutputType.*;
 
 public class ContactCreationTest {
     FirefoxDriver wd;
@@ -21,18 +16,18 @@ public class ContactCreationTest {
     public void setUp() throws Exception {
         wd = new FirefoxDriver();
         wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-        login();
+        login("admin", "secret");
     }
 
-    private void login() {
+    private void login(String login, String password) {
         wd.get("http://localhost/addressbook/edit.php");
         wd.findElement(By.cssSelector("body")).click();
         wd.findElement(By.name("user")).click();
         wd.findElement(By.name("user")).clear();
-        wd.findElement(By.name("user")).sendKeys("admin");
+        wd.findElement(By.name("user")).sendKeys(login);
         wd.findElement(By.name("pass")).click();
         wd.findElement(By.name("pass")).clear();
-        wd.findElement(By.name("pass")).sendKeys("secret");
+        wd.findElement(By.name("pass")).sendKeys(password);
         wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
     }
 
@@ -40,7 +35,7 @@ public class ContactCreationTest {
     public void testContactCreation() {
 
         initNewContact();
-        fillForm();
+        fillForm("test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9", "test10");
         submitNewContact();
     }
 
@@ -48,36 +43,36 @@ public class ContactCreationTest {
         wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
     }
 
-    private void fillForm() {
+    private void fillForm(String firstname, String middlename, String lastname, String nickname, String title, String company, String address, String home, String mobilephone, String workphone) {
         wd.findElement(By.name("firstname")).clear();
-        wd.findElement(By.name("firstname")).sendKeys("test1");
+        wd.findElement(By.name("firstname")).sendKeys(firstname);
         wd.findElement(By.name("middlename")).click();
         wd.findElement(By.name("middlename")).clear();
-        wd.findElement(By.name("middlename")).sendKeys("test2");
+        wd.findElement(By.name("middlename")).sendKeys(middlename);
         wd.findElement(By.name("lastname")).click();
         wd.findElement(By.name("lastname")).clear();
-        wd.findElement(By.name("lastname")).sendKeys("test3");
+        wd.findElement(By.name("lastname")).sendKeys(lastname);
         wd.findElement(By.name("nickname")).click();
         wd.findElement(By.name("nickname")).clear();
-        wd.findElement(By.name("nickname")).sendKeys("test4");
+        wd.findElement(By.name("nickname")).sendKeys(nickname);
         wd.findElement(By.name("title")).click();
         wd.findElement(By.name("title")).clear();
-        wd.findElement(By.name("title")).sendKeys("test5");
+        wd.findElement(By.name("title")).sendKeys(title);
         wd.findElement(By.name("company")).click();
         wd.findElement(By.name("company")).clear();
-        wd.findElement(By.name("company")).sendKeys("test6");
+        wd.findElement(By.name("company")).sendKeys(company);
         wd.findElement(By.name("address")).click();
         wd.findElement(By.name("address")).clear();
-        wd.findElement(By.name("address")).sendKeys("test7");
+        wd.findElement(By.name("address")).sendKeys(address);
         wd.findElement(By.name("home")).click();
         wd.findElement(By.name("home")).clear();
-        wd.findElement(By.name("home")).sendKeys("test8");
+        wd.findElement(By.name("home")).sendKeys(home);
         wd.findElement(By.name("mobile")).click();
         wd.findElement(By.name("mobile")).clear();
-        wd.findElement(By.name("mobile")).sendKeys("test9");
+        wd.findElement(By.name("mobile")).sendKeys(mobilephone);
         wd.findElement(By.name("work")).click();
         wd.findElement(By.name("work")).clear();
-        wd.findElement(By.name("work")).sendKeys("test10");
+        wd.findElement(By.name("work")).sendKeys(workphone);
     }
 
     private void initNewContact() {
