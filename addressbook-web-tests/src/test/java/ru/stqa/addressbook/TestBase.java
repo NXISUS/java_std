@@ -72,4 +72,12 @@ public class TestBase {
   public void tearDown() {
     wd.quit();
   }
+
+  protected void selectGroup() {
+      wd.findElement(By.xpath("//div[@id='content']/form/span[2]/input")).click();
+  }
+
+  protected void deletSelectedGroups() {
+      wd.findElement(By.name("delete")).click();
+  }
 }

@@ -1,17 +1,26 @@
 package ru.stqa.addressbook;
 
-import org.testng.annotations.BeforeMethod;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.*;
-
-public class ContactCreationTest {
+public class ContactCreationTests {
     FirefoxDriver wd;
     
+    public static boolean isAlertPresent(FirefoxDriver wd) {
+        try {
+            wd.switchTo().alert();
+            return true;
+        } catch (NoAlertPresentException e) {
+            return false;
+        }
+    }
+
     @BeforeMethod
     public void setUp() throws Exception {
         wd = new FirefoxDriver();
@@ -32,7 +41,7 @@ public class ContactCreationTest {
     }
 
     @Test
-    public void testContactCreation() {
+    public void testsContactCreation() {
 
         initNewContact();
         fillForm("test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9", "test10");
@@ -78,18 +87,9 @@ public class ContactCreationTest {
     private void initNewContact() {
         wd.findElement(By.name("firstname")).click();
     }
-
+    
     @AfterMethod
     public void tearDown() {
         wd.quit();
-    }
-    
-    public static boolean isAlertPresent(FirefoxDriver wd) {
-        try {
-            wd.switchTo().alert();
-            return true;
-        } catch (NoAlertPresentException e) {
-            return false;
-        }
     }
 }
