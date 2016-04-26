@@ -6,14 +6,13 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 /**
  * Created by Evolve Computing on 4/25/2016.
  */
-public class NavigationHelper {
- private FirefoxDriver wd;
+public class NavigationHelper extends HelperBase {
 
   public NavigationHelper(FirefoxDriver wd) {
-    this.wd =wd;
+    super(wd);
   }
 
   public void gotoGroupPage() {
-    wd.findElement(By.xpath("//div[@id='content']/form/input[4]")).click();
+    click(By.xpath("//div[@id='content']/form/input[4]"));
   }
 }
